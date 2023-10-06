@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://5cenh4pai4p1"]
+
+[ext_resource type="PackedScene" uid="uid://canx21ef4it1v" path="res://track/rail.tscn" id="1_2x528"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_svcmh"]
+size = Vector3(2.1, 0.2, 0.2)
+
+[node name="TrackSegment1067" type="Node3D"]
+
+[node name="RailL" parent="." instance=ExtResource("1_2x528")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.533, 0, 0)
+
+[node name="RailR" parent="." instance=ExtResource("1_2x528")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.534, 0, 0)
+
+[node name="Sleeper" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.236, 0)
+mesh = SubResource("BoxMesh_svcmh")

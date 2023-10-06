@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://dt80m1u2xt0au"]
+
+[ext_resource type="Script" path="res://PathRepeat.gd" id="1_n8vty"]
+[ext_resource type="PackedScene" uid="uid://5cenh4pai4p1" path="res://track/track_segment_1067.tscn" id="2_vhbk8"]
+
+[sub_resource type="Curve3D" id="Curve3D_4jkcb"]
+bake_interval = 0.1
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 5, -0.0159682, 0, 6.4391, 0.0159682, 0, -6.4391, 0, 0, -10, -0.908402, 0, 3.11536, 0.908402, 0, -3.11536, 2.04916, 0, -24.0863, -4.08973, 0, 8.05427, 4.08973, 0, -8.05427, 8.80974, 0, -40.5287, -0.0567741, 0, 7.04023, 0.0567741, 0, -7.04023, 13.3128, 0, -63.0865, 9.68349, 0, 6.61909, -9.68349, 0, -6.61909, -1.38586, 0, -82.0891, 5.51591, 0, 0.735451, -5.51591, 0, -0.735451, -36.32, 0, -83.1923, 6.98682, 0, 5.76106, -6.98682, 0, -5.76106, -59.1191, 0, -92.5081),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 8
+
+[node name="Composition03" type="Node3D"]
+
+[node name="PathRepeat" type="Path3D" parent="."]
+visible = false
+curve = SubResource("Curve3D_4jkcb")
+script = ExtResource("1_n8vty")
+repeated_scene = ExtResource("2_vhbk8")
+
+[node name="PathRepeat2" type="Path3D" parent="."]
+curve = SubResource("Curve3D_4jkcb")
+script = ExtResource("1_n8vty")
+repeated_scene = ExtResource("2_vhbk8")
+interval = 0.57

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://canx21ef4it1v"]
+
+[node name="Rail" type="Node3D"]
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.032, -0.136, 0.3)
+polygon = PackedVector2Array(-0.063, 0, -0.063, 0.01, -0.015, 0.025, -0.015, 0.096, -0.032, 0.106, -0.032, 0.13, -0.02, 0.136, 0.02, 0.136, 0.032, 0.13, 0.032, 0.106, 0.015, 0.096, 0.015, 0.025, 0.063, 0.01, 0.063, 0)
+depth = 0.6
