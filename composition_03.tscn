@@ -1,20 +1,207 @@
-[gd_scene load_steps=4 format=3 uid="uid://dt80m1u2xt0au"]
+[gd_scene load_steps=7 format=3 uid="uid://dt80m1u2xt0au"]
 
-[ext_resource type="Script" path="res://PathRepeat.gd" id="1_n8vty"]
-[ext_resource type="PackedScene" uid="uid://5cenh4pai4p1" path="res://track/track_segment_1067.tscn" id="2_vhbk8"]
+[ext_resource type="Material" uid="uid://8giwk7d0eg7n" path="res://material/terrain.tres" id="1_3dbmx"]
+[ext_resource type="Material" uid="uid://cwtgcspr75ddx" path="res://material/building1_red.tres" id="2_140ni"]
+[ext_resource type="Material" uid="uid://e6d08uux2i2s" path="res://material/building1_windowframe.tres" id="3_ywibo"]
+[ext_resource type="Material" uid="uid://c0duaub4onjwv" path="res://material/building1_windowglass.tres" id="4_oj6tm"]
 
-[sub_resource type="Curve3D" id="Curve3D_4jkcb"]
-bake_interval = 0.1
-_data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 5, -0.0159682, 0, 6.4391, 0.0159682, 0, -6.4391, 0, 0, -10, -0.908402, 0, 3.11536, 0.908402, 0, -3.11536, 2.04916, 0, -24.0863, -4.08973, 0, 8.05427, 4.08973, 0, -8.05427, 8.80974, 0, -40.5287, -0.0567741, 0, 7.04023, 0.0567741, 0, -7.04023, 13.3128, 0, -63.0865, 9.68349, 0, 6.61909, -9.68349, 0, -6.61909, -1.38586, 0, -82.0891, 5.51591, 0, 0.735451, -5.51591, 0, -0.735451, -36.32, 0, -83.1923, 6.98682, 0, 5.76106, -6.98682, 0, -5.76106, -59.1191, 0, -92.5081),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0)
-}
-point_count = 8
+[sub_resource type="QuadMesh" id="QuadMesh_auaxm"]
+material = ExtResource("1_3dbmx")
+size = Vector2(64, 64)
+orientation = 1
+
+[sub_resource type="BoxMesh" id="BoxMesh_42anj"]
+size = Vector3(1, 1, 23)
 
 [node name="Composition03" type="Node3D"]
 
-[node name="PathRepeat" type="Path3D" parent="."]
-curve = SubResource("Curve3D_4jkcb")
-script = ExtResource("1_n8vty")
-repeated_scene = ExtResource("2_vhbk8")
-interval = 0.57
+[node name="Terrain" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_auaxm")
+
+[node name="MeasuringTape" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.03316e-07, 0, -1, 0, 1, 0, 1, 0, 1.03316e-07, -28.1627, 0, -3.85771)
+visible = false
+mesh = SubResource("BoxMesh_42anj")
+
+[node name="Building1_Red" type="CSGBox3D" parent="."]
+transform = Transform3D(0.628112, 0, 0.778123, 0, 1, 0, -0.778123, 0, 0.628112, -28, 18.5, -16)
+snap = 0.0001
+size = Vector3(23, 37, 20)
+material = ExtResource("2_140ni")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Building1_Red"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 5.71444, 0, 7.07837)
+operation = 2
+snap = 0.0001
+size = Vector3(16, 37, 33)
+material = ExtResource("2_140ni")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Building1_Red"]
+transform = Transform3D(-0.382683, 0, -0.92388, 0, 1, 0, 0.92388, 0, -0.382683, -10.776, 0, 11.231)
+operation = 2
+snap = 0.0001
+size = Vector3(4, 37, 3.225)
+material = ExtResource("2_140ni")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Building1_Red"]
+transform = Transform3D(0.382684, 0, 0.92388, 0, 1, 0, -0.92388, 0, 0.382684, -10.029, -1, 9.396)
+operation = 2
+snap = 0.0001
+
+[node name="CornerWindowBay" type="CSGBox3D" parent="Building1_Red/CSGCombiner3D"]
+transform = Transform3D(0.923881, 0, 0.382684, 0, 1, 0, -0.382684, 0, 0.923881, -0.335188, 0, 0.159037)
+snap = 0.0001
+size = Vector3(2, 27, 2.98)
+material = ExtResource("2_140ni")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Building1_Red/CSGCombiner3D"]
+transform = Transform3D(0.866025, 0.5, 2.98023e-08, -0.5, 0.866026, 0, -2.08616e-07, 0, 1, 1.484, -13.75, 0.0120049)
+operation = 2
+snap = 0.0001
+size = Vector3(2.15, 2, 3.225)
+material = ExtResource("2_140ni")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Building1_Red/CSGCombiner3D"]
+transform = Transform3D(0.866025, -0.5, 2.98023e-08, 0.5, 0.866025, 0, 0, 0, 1, 1.484, 13.1752, 0.0120029)
+operation = 2
+snap = 0.0001
+size = Vector3(2.15, 2, 3.225)
+material = ExtResource("2_140ni")
+
+[node name="Building1_CornerWindowFrame" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.878075, 0, -0.478524, 0, 1, 0, 0.478524, 0, -0.878075, -26.8984, 17.5, -3.64914)
+snap = 0.0001
+size = Vector3(1.2, 28, 0.8)
+material = ExtResource("3_ywibo")
+
+[node name="Building1_ElevatorWindowFrame" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.106074, 0, 0.994359, 0, 1, 0, -0.994359, 0, -0.106074, -26.574, 21.1, -9.96538)
+snap = 0.0001
+size = Vector3(1.8, 32, 0.8)
+material = ExtResource("3_ywibo")
+
+[node name="ElevatorWindowGlass1" type="CSGBox3D" parent="Building1_ElevatorWindowFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15.2, 0.4)
+operation = 2
+size = Vector3(1.7, 1.5, 0.1)
+material = ExtResource("4_oj6tm")
+
+[node name="ElevatorWindowGlass2" type="CSGBox3D" parent="Building1_ElevatorWindowFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -13.65, 0.4)
+operation = 2
+size = Vector3(1.7, 1.5, 0.1)
+material = ExtResource("4_oj6tm")
+
+[node name="ElevatorWindowGlass3" type="CSGBox3D" parent="Building1_ElevatorWindowFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -12.1, 0.4)
+operation = 2
+size = Vector3(1.7, 1.5, 0.1)
+material = ExtResource("4_oj6tm")
+
+[node name="ElevatorWindowGlass4" type="CSGBox3D" parent="Building1_ElevatorWindowFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10.55, 0.4)
+operation = 2
+size = Vector3(1.7, 1.5, 0.1)
+material = ExtResource("4_oj6tm")
+
+[node name="ElevatorWindowGlass5" type="CSGBox3D" parent="Building1_ElevatorWindowFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9, 0.4)
+operation = 2
+size = Vector3(1.7, 1.5, 0.1)
+material = ExtResource("4_oj6tm")
+
+[node name="ElevatorWindowGlass6" type="CSGBox3D" parent="Building1_ElevatorWindowFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.45, 0.4)
+operation = 2
+size = Vector3(1.7, 1.5, 0.1)
+material = ExtResource("4_oj6tm")
+
+[node name="ElevatorWindowGlass7" type="CSGBox3D" parent="Building1_ElevatorWindowFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.9, 0.4)
+operation = 2
+size = Vector3(1.7, 1.5, 0.1)
+material = ExtResource("4_oj6tm")
+
+[node name="ElevatorWindowGlass8" type="CSGBox3D" parent="Building1_ElevatorWindowFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.35, 0.4)
+operation = 2
+size = Vector3(1.7, 1.5, 0.1)
+material = ExtResource("4_oj6tm")
+
+[node name="ElevatorWindowGlass9" type="CSGBox3D" parent="Building1_ElevatorWindowFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.8, 0.4)
+operation = 2
+size = Vector3(1.7, 1.5, 0.1)
+material = ExtResource("4_oj6tm")
+
+[node name="ElevatorWindowGlass10" type="CSGBox3D" parent="Building1_ElevatorWindowFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.25, 0.4)
+operation = 2
+size = Vector3(1.7, 1.5, 0.1)
+material = ExtResource("4_oj6tm")
+
+[node name="ElevatorWindowGlass11" type="CSGBox3D" parent="Building1_ElevatorWindowFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.300001, 0.4)
+operation = 2
+size = Vector3(1.7, 1.5, 0.1)
+material = ExtResource("4_oj6tm")
+
+[node name="ElevatorWindowGlass12" type="CSGBox3D" parent="Building1_ElevatorWindowFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.85, 0.4)
+operation = 2
+size = Vector3(1.7, 1.5, 0.1)
+material = ExtResource("4_oj6tm")
+
+[node name="ElevatorWindowGlass13" type="CSGBox3D" parent="Building1_ElevatorWindowFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.4, 0.4)
+operation = 2
+size = Vector3(1.7, 1.5, 0.1)
+material = ExtResource("4_oj6tm")
+
+[node name="ElevatorWindowGlass14" type="CSGBox3D" parent="Building1_ElevatorWindowFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.95, 0.4)
+operation = 2
+size = Vector3(1.7, 1.5, 0.1)
+material = ExtResource("4_oj6tm")
+
+[node name="ElevatorWindowGlass15" type="CSGBox3D" parent="Building1_ElevatorWindowFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.5, 0.4)
+operation = 2
+size = Vector3(1.7, 1.5, 0.1)
+material = ExtResource("4_oj6tm")
+
+[node name="ElevatorWindowGlass16" type="CSGBox3D" parent="Building1_ElevatorWindowFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.05, 0.4)
+operation = 2
+size = Vector3(1.7, 1.5, 0.1)
+material = ExtResource("4_oj6tm")
+
+[node name="ElevatorWindowGlass17" type="CSGBox3D" parent="Building1_ElevatorWindowFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.6, 0.4)
+operation = 2
+size = Vector3(1.7, 1.5, 0.1)
+material = ExtResource("4_oj6tm")
+
+[node name="ElevatorWindowGlass18" type="CSGBox3D" parent="Building1_ElevatorWindowFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.15, 0.4)
+operation = 2
+size = Vector3(1.7, 1.5, 0.1)
+material = ExtResource("4_oj6tm")
+
+[node name="ElevatorWindowGlass19" type="CSGBox3D" parent="Building1_ElevatorWindowFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.7, 0.4)
+operation = 2
+size = Vector3(1.7, 1.5, 0.1)
+material = ExtResource("4_oj6tm")
+
+[node name="ElevatorWindowGlass20" type="CSGBox3D" parent="Building1_ElevatorWindowFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.25, 0.4)
+operation = 2
+size = Vector3(1.7, 1.5, 0.1)
+material = ExtResource("4_oj6tm")
+
+[node name="ElevatorWindowGlass21" type="CSGBox3D" parent="Building1_ElevatorWindowFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.5, 0.4)
+operation = 2
+size = Vector3(1.7, 0.9, 0.1)
+material = ExtResource("4_oj6tm")
