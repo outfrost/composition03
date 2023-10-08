@@ -32,6 +32,9 @@ func _ready() -> void:
 	add_child(repeat_container, false, Node.INTERNAL_MODE_FRONT)
 	curve_changed.connect(refresh)
 
+func has_valid_parameters() -> bool:
+	return repeated_scene && interval >= 0.1
+
 func regenerate() -> void:
 	if !is_node_ready():
 		return
@@ -42,7 +45,7 @@ func regenerate() -> void:
 		scene_instance.queue_free()
 	instance_pool.clear()
 
-	if !repeated_scene || interval <= 0.0 || is_zero_approx(interval):
+	if !has_valid_parameters():
 		return
 
 	var current_travel: = 0.0
@@ -58,7 +61,7 @@ func refresh() -> void:
 		return
 
 	var i: = 0
-	if repeated_scene && interval > 0.0 && !is_zero_approx(interval):
+	if has_valid_parameters():
 		var current_travel: = 0.0
 		while current_travel <= curve.get_baked_length():
 			var scene_instance: Node3D

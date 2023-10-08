@@ -14,12 +14,6 @@ point_count = 8
 [node name="Composition03" type="Node3D"]
 
 [node name="PathRepeat" type="Path3D" parent="."]
-visible = false
-curve = SubResource("Curve3D_4jkcb")
-script = ExtResource("1_n8vty")
-repeated_scene = ExtResource("2_vhbk8")
-
-[node name="PathRepeat2" type="Path3D" parent="."]
 curve = SubResource("Curve3D_4jkcb")
 script = ExtResource("1_n8vty")
 repeated_scene = ExtResource("2_vhbk8")

@@ -1,8 +1,16 @@
-[gd_scene format=3 uid="uid://canx21ef4it1v"]
+[gd_scene load_steps=3 format=3 uid="uid://canx21ef4it1v"]
+
+[ext_resource type="ArrayMesh" uid="uid://r0j5euep6gui" path="res://track/rail_bakedmesh.res" id="1_c0flt"]
+[ext_resource type="Script" path="res://track/BakedCSGMesh.gd" id="1_k433m"]
 
 [node name="Rail" type="Node3D"]
 
-[node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
+[node name="BakedCSGMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.032, -0.136, 0.3)
+mesh = ExtResource("1_c0flt")
+script = ExtResource("1_k433m")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="BakedCSGMesh"]
+visible = false
 polygon = PackedVector2Array(-0.063, 0, -0.063, 0.01, -0.015, 0.025, -0.015, 0.096, -0.032, 0.106, -0.032, 0.13, -0.02, 0.136, 0.02, 0.136, 0.032, 0.13, 0.032, 0.106, 0.015, 0.096, 0.015, 0.025, 0.063, 0.01, 0.063, 0)
 depth = 0.6
